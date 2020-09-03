@@ -7,30 +7,31 @@ class Customer():
         self.email = email
 
     def clients_home(self):
-        print("1. Get account statement.")
+        print("\n1. Get account statement.")
         print("2. Deposit amount into your account.")
         print("3. Withdraw cash")
         print("4. Send money to another account.")
+        print("5. Logout\n")
 
     def account_registration(self):
-        print("Welcome to account creation in Maendeleo Bank. \n\nFill in the daetails as instructed")
+        print("\nWelcome to account creation in Maendeleo Bank. \n\nFill in the daetails as instructed")
 
     
         try:
 
-            name = str(input("Name: "))
+            name = str(input("\nName: "))
             email = str(input("Email: "))
             min_amount = int(input("Enter minmum amount of 100 henceforth: Sh "))
    
 
         except:
-            print("Enter valid inputs")
+            print("\nEnter valid inputs\n")
 
         else:
 
 
             if min_amount < 100:
-                print("Enter a valid amount")
+                print("\nEnter a valid amount\n")
 
             else:
                 try:
@@ -48,7 +49,7 @@ class Customer():
 
 
     def sign_in(self):
-        print("Enter your email to sign in")
+        print("\nEnter your email to sign in")
         email = str(input("Email: "))
 
         try:
@@ -74,7 +75,7 @@ class Customer():
                     self.email.append(email)
 
         except Exception as e:
-            print(f"Database errors {e}")
+            print(f"\nDatabase errors {e}")
 
         else:
             pass
@@ -90,11 +91,11 @@ class Customer():
             deposit = int(input("\nEnter amount to deposit(minimum 50): Sh "))
             
         except:
-            print("Enter valid input")
+            print("\nEnter valid input\n")
 
         else:
             if deposit < 50:
-                print("Enter valid amount")
+                print("\nEnter valid amount\n")
 
             else:
                 with sqlite3.connect("profiles.sqlite3") as conn:
@@ -132,10 +133,10 @@ class Customer():
             # print(original_bal[0][0])
 
             try:
-                withdrawal_amt = int(input("Enter amount to withdraw: Sh "))
+                withdrawal_amt = int(input("\nEnter amount to withdraw: Sh "))
 
             except:
-                print("Enter valid input")
+                print("\nEnter valid input\n")
 
             else:
                 if withdrawal_amt > original_bal[0][0]:
@@ -143,7 +144,7 @@ class Customer():
 
                 else:
                     if withdrawal_amt < 1:
-                        print("Invalid amount")
+                        print("\nInvalid amount\n")
 
                     else:
                         
@@ -164,7 +165,7 @@ class Customer():
 
         login_email = self.email[0]
 
-        receiver = str(input("Enter email of the recepient account: "))
+        receiver = str(input("\nEnter email of the recepient account: "))
 
         with sqlite3.connect("profiles.sqlite3") as conn:
             command = "SELECT Email FROM PersonInfo"
@@ -193,16 +194,16 @@ class Customer():
             # print(emails)
 
             if receiver in emails:
-                print(f"You're about to send money to: {receiver}\n")
+                print(f"\n\nYou're about to send money to: {receiver}\n")
 
                 try:
                     amount_to_send = int(input("Enter the amount to send: Sh "))
 
                 except:
-                    print("Enter a valid input")
+                    print("\nEnter a valid input\n")
                 else:
                     if (amount_to_send < 1) or (amount_to_send > original_bal):
-                        print("Invalid amount.")
+                        print("Invalid amount.\n")
 
                     else:
                         
@@ -228,7 +229,7 @@ class Customer():
                     
 
             else:
-                print(f"No account with id : {receiver}")
+                print(f"\nNo account with id : {receiver}\n")
 
     def account_statement(self):
         login_email = self.email[0]
@@ -242,4 +243,4 @@ class Customer():
             name, email, account_balance = statement_response[0]
 
             print("\nYour Account statement is as follows.")
-            print(f"\nName : {name}\nEmail: {email}\nAccount Balance: Sh {account_balance}")
+            print(f"\nName : {name}\nEmail: {email}\nAccount Balance: Sh {account_balance}\n")

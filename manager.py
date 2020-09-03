@@ -8,6 +8,7 @@ class Manager():
         print("\nWelcome to the Admins section. Only admins are allowed.\n")
         print("1. Create Bank's Admin account.")
         print("2. Sign in as an Admin.")
+        print("3. Exit application.\n")
         
     def admins_actions(self):
         print("\nChooce the admin Action to Perfeorm")
@@ -15,25 +16,26 @@ class Manager():
         print("2. Get admins info.")
         print("3. Delete a customer's account.")
         print("4. Delete an admin's account")
+        print("5. Logout application.\n")
 
     def account_registration(self):
-        print("Register as an admin Here")
+        print("\nRegister as an admin Here")
 
     
         try:
 
-            name = str(input("Name: "))
+            name = str(input("\nName: "))
             employee_id = int(input("Enter Employee ID(Should be 8 integersi.e 12345678): "))
   
 
         except:
-            print("Enter valid inputs")
+            print("\nEnter valid inputs\n")
 
         else:
 
 
             if (employee_id < 0) or (len(str(employee_id)) < 8):
-                print("Enter a valid employee Id")
+                print("\nEnter a valid employee Id\n")
 
             else:
                 try:
@@ -47,19 +49,19 @@ class Manager():
 
                 else:
                     print("")
-                    print("You've successfully created an account as an admin.")
+                    print("\nYou've successfully created an account as an admin.\n")
 
 
     def sign_in(self):
-        print("Enter employee id to sign in")
+        print("\nEnter employee id to sign in")
 
         try:
             # email = str(input("Email: "))
-            employee_id = int(input("Employee Id(Should be 8 integers.i.e 12345678): "))
+            employee_id = int(input("\nEmployee Id(Should be 8 integers.i.e 12345678): "))
 
 
         except:
-            return "Failed"
+            return "Failed "
 
         else:
             try:
@@ -86,7 +88,7 @@ class Manager():
                     
                         
     def delete_client_account(self):
-        client_account = str(input("Enter the clients account's email to delete: "))
+        client_account = str(input("\nEnter the clients account's email to delete: "))
 
         emails = []
         try:
@@ -102,14 +104,14 @@ class Manager():
                     delete_command = "DELETE FROM PersonInfo WHERE Email = ?"
                     cursor.execute(delete_command,(client_account,))
 
-                    print(f"\n{client_account} has been sucessfully deleted.")
+                    print(f"\n{client_account} has been sucessfully deleted.\n")
 
                 else:
-                    print("Invalid account email")
+                    print("\nInvalid account email")
 
         
         except:
-            print("Some errors...")
+            print("\nSome errors...\n")
 
         else:
             pass
@@ -126,7 +128,8 @@ class Manager():
 
             print("\n\nBelow are the Admins Info.")
             for admin in admins_response:
-                print(admin)
+                name, employee_id = admin
+                print(f"\nName: {name}\t\tEmployee Id: {employee_id}")
 
 
     def display_customers(self):
@@ -140,11 +143,12 @@ class Manager():
 
             print("\n\nBelow are the Customers Info.")
             for customer in customers_response:
-                print(customer)
+                name, email, account_bal = customer
+                print(f"\nName: {name}\t\tEmail:{email}\t\tAcount Balance: Sh {account_bal}")
 
     
     def delete_admin(self):
-        admin_id_to_delete = int(input("Enter the admin account id to delete: "))
+        admin_id_to_delete = int(input("\nEnter the admin account id to delete: "))
 
         emp_ids = []
         try:
@@ -167,11 +171,11 @@ class Manager():
                     print(f"\n{admin_id_to_delete} has been sucessfully deleted.")
 
                 else:
-                    print("Invalid admin's id")
+                    print("\nInvalid admin's id\n")
 
         
         except:
-            print("Some errors...")
+            print("\nSome errors...\n")
 
         else:
             pass
